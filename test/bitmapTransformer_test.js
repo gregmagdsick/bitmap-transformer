@@ -1,3 +1,6 @@
+// test transform does what we think (test one pixel)
+// test header data correct
+
 const bt = require(__dirname + '/../lib/bitmapTransformer');
 const fs = require('fs');
 const expect = require('chai').expect;
