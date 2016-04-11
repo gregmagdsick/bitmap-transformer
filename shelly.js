@@ -4,7 +4,7 @@ const fs = require('fs');
 var bitmap = fs.readFileSync(__dirname + '/img/pallet-bitmap.bmp');
 
 var bitmapData = {};
-bitmapData.headField = bitmap.toString('ascii',0,2);
+bitmapData.headField = bitmap.toString('ascii', 0, 2);
 bitmapData.size = bitmap.readUInt32LE(2);
 bitmapData.pixelArrayStart = bitmap.readUInt32LE(10);
 bitmapData.paletteColors = bitmap.readUInt32LE(46);
@@ -13,69 +13,46 @@ bitmapData.maybeColors = bitmap.readUInt32LE(46);
 bitmapData.height = bitmap.readUInt32LE(22);
 bitmapData.width = bitmap.readUInt32LE(18);
 bitmapData.bpp = bitmap.readUInt32LE(28);
-bitmapData.theSize= bitmap.readUInt32LE(34);
+bitmapData.theSize = bitmap.readUInt32LE(34);
 bitmapData.vip = bitmap.readUInt32LE(54);
 
 console.dir(bitmapData);
 console.log(bitmap.readUInt32LE(2));
-var colors ={};
-colors.getTheColors = function(){
+var colors = {};
+colors.getTheColors = function() {
 
-  for (var i = 54; i < 70; i++){
+  for (var i = 54; i < 70; i++) {
     console.log('colors: ' + bitmap[i]);
-  };
+  }
   // console.log('Color: ' + bitmap[54]);
 };
 
 
-colors.alterColors = function(){
+colors.alterColors = function() {
   var x = bitmap[54];
   console.log('var x: ' + x);
     // var x = bitmap[90];
   for (var i = 54; i < bitmapData.pixelArrayStart; i = i + 4) {
-    aVal = bitmap.readUInt8(i);
-    bVal = bitmap.readUInt8(i + 1);
-    gVal = bitmap.readUInt8(i + 2);
-    rVal = bitmap.readUInt8(i + 3);
+    var aVal = bitmap.readUInt8(i);
+    var bVal = bitmap.readUInt8(i + 1);
+    var gVal = bitmap.readUInt8(i + 2);
+    var rVal = bitmap.readUInt8(i + 3);
 
-    bitmap[i] = -(aVal-255);
-    bitmap[i + 1] = -(bVal-255);
-    bitmap[i + 2] = -(gVal-255);
-    bitmap[i + 3] = -(rVal-255);
-  };
+    bitmap.writeUInt8(-(aVal - 255), i);
+    bitmap.writeUInt8(-(bVal - 255), i + 1);
+    bitmap.writeUInt8(-(gVal - 255), i + 2);
+    bitmap.writeUInt8(-(rVal - 255), i + 3);
+  }
 
   return bitmap;
 };
 
-// colors.getTheColors();
-// colors.alterColors();
 
-colors.changeTheColors = function(){
-// 90 = green streak; // 54 = blue;// 55 = green; // 56 =red;
-
-  for(var i = 55;i<60; i + 4){
-    // if i =
-    // bitmap.writeUInt32LE(255, 54);
-    // bitmap.writeUInt32LE(255, i);
-    // bitmap.writeUInt32LE(0, i+1);
-    // bitmap.writeUInt32LE(255, i+2);
-
-    console.log('break');
-    colors.getTheColors();
-    colors.alterColors();
-    colors.getTheColors();
-    return(bitmap);
-  };
-
-};
-
-colors.changeTheColors();
-
-// colors.alterColors();
+colors.alterColors();
 
 var date = new Date();
 
-fs.writeFile('img/newimage' + date + '.bmp', bitmap, (err)=>{
+fs.writeFile('img/newimage' + date + '.bmp', bitmap, (err) => {
   if (err) throw err;
   console.log('done');
 });
