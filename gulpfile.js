@@ -38,3 +38,4 @@ gulp.task('testEslint:non-testFile', () => {
 });
 
 gulp.task('test', ['testEslint:non-testFile', 'testEslint:testFile', 'testMocha']);
+gulp.task('default', ['test']);
