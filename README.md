@@ -12,4 +12,4 @@ The default value for transformType is greyscale, so if you leave off that argum
 Also, the default value for image is pallet-bitmap.bmp, so if all you type is  'node lib/bitmapTransformer.js', you will run a greyscale transform on the pallet-bitmap.bmp file.
 
 ***To Test***
-on the command line, type gulp test, and you will run the linter on all files, as well as run the mocha tests that are in /test.
+on the command line, type 'gulp' , and you will run the linter on all files, as well as run the mocha tests that are in /test.

@@ -7,13 +7,6 @@ const expect = require('chai').expect;
 
 
 describe('Bitmap Test', () => {
-  before(() => {
-    bt('invert');
-    bt('greyscale');
-  });
-  it('breaking test', () => {
-    expect(true === false);
-  });
   it('bt should be a function', () => {
     expect(typeof bt).to.eql('function');
   });
