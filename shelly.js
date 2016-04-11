@@ -38,11 +38,10 @@ colors.alterColors = function(){
     gVal = bitmap.readUInt8(i + 2);
     rVal = bitmap.readUInt8(i + 3);
 
-    bitmap.write((-(aVal-255)).toString(), i);
-    bitmap.write((-(bVal-255)).toString(), i + 1);
-    bitmap.write((-(gVal-255)).toString(), i + 2);
-    bitmap.write((-(rVal-255)).toString(), i + 3);
-
+    bitmap[i] = -(aVal-255);
+    bitmap[i + 1] = -(bVal-255);
+    bitmap[i + 2] = -(gVal-255);
+    bitmap[i + 3] = -(rVal-255);
   };
 
   return bitmap;
